@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020807" />
+    <title>学点儿作品集</title>
+    <style>
+      :root {
+        --bg: #020807;
+        --panel: rgba(5, 22, 18, 0.82);
+        --line: rgba(184, 255, 184, 0.16);
+        --text: #f4fff5;
+        --muted: #91a8a0;
+        --green: #9cff59;
+        --mint: #19ef9a;
+        --cyan: #68ddff;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 16% 10%, rgba(54, 255, 154, 0.18), transparent 32rem),
+          radial-gradient(circle at 82% 28%, rgba(79, 217, 255, 0.12), transparent 30rem),
+          linear-gradient(180deg, #020706 0%, #061611 46%, #020807 100%);
+      }
+      a { color: inherit; text-decoration: none; }
+      .frame { width: min(1700px, calc(100vw - 80px)); margin: 0 auto; }
+      .topbar {
+        position: fixed; z-index: 20; top: 24px; left: 50%; transform: translateX(-50%);
+        height: 86px; border: 1px solid var(--line); border-radius: 999px;
+        background: rgba(1, 12, 10, 0.78); backdrop-filter: blur(22px);
+        display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+      }
+      .brand { display: flex; align-items: center; gap: 16px; }
+      .mark {
+        width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(156, 255, 89, 0.38);
+        display: grid; place-items: center; background: rgba(156, 255, 89, 0.08); color: var(--mint);
+      }
+      .mark svg { width: 34px; height: 34px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .brand strong { display: block; font-size: 24px; }
+      .brand span, .kicker { color: var(--muted); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; }
+      nav { display: flex; gap: 28px; color: #b7c8c1; font-size: 15px; }
+      .contact { border: 1px solid rgba(104, 221, 255, 0.28); border-radius: 999px; padding: 16px 24px; color: #dfffee; background: rgba(25, 239, 154, 0.08); }
+      .hero { min-height: 100vh; padding: 168px 0 80px; display: grid; align-items: center; }
+      .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 64px; align-items: end; }
+      h1 { margin: 0; max-width: 980px; font-size: clamp(72px, 8vw, 142px); line-height: 0.92; letter-spacing: 0; }
+      h2 { margin: 0; font-size: clamp(44px, 5vw, 86px); line-height: 1.02; letter-spacing: 0; }
+      h3 { margin: 0; font-size: 28px; letter-spacing: 0; }
+      p { color: #aabbb5; line-height: 1.8; font-size: 18px; }
+      .hero-copy > p { max-width: 920px; margin-top: 36px; font-size: 24px; }
+      .actions { display: flex; gap: 18px; margin-top: 46px; }
+      .button { border-radius: 999px; padding: 18px 26px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); }
+      .button.primary { background: linear-gradient(135deg, rgba(25,239,154,0.32), rgba(104,221,255,0.12)); border-color: rgba(25,239,154,0.38); }
+      .case-card {
+        border: 1px solid var(--line); border-radius: 48px; background: rgba(2, 13, 11, 0.74);
+        padding: 46px; min-height: 520px; display: flex; flex-direction: column; justify-content: space-between;
+        box-shadow: 0 36px 120px rgba(0,0,0,0.36);
+      }
+      .case-card .mark { width: 96px; height: 96px; border-radius: 28px; }
+      .case-card .mark svg { width: 58px; height: 58px; }
+      .case-card .quote { color: white; font-size: 38px; line-height: 1.28; }
+      section { padding: 110px 0; }
+      .section-head { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 72px; align-items: end; margin-bottom: 54px; }
+      .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .card {
+        min-height: 280px; padding: 34px; border: 1px solid var(--line); border-radius: 34px;
+        background: linear-gradient(180deg, rgba(8, 26, 21, 0.88), rgba(4, 16, 14, 0.72));
+      }
+      .num { color: var(--green); font-size: 14px; letter-spacing: 0.18em; }
+      .pill-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+      .pill { border: 1px solid rgba(156,255,89,0.24); border-radius: 999px; padding: 10px 15px; color: #e6ffe2; background: rgba(156,255,89,0.08); }
+      .journey { display: grid; grid-template-columns: repeat(6, minmax(210px, 1fr)); gap: 16px; overflow-x: auto; padding-bottom: 10px; }
+      .stage { min-height: 330px; padding: 28px; border-radius: 28px; border: 1px solid var(--line); background: rgba(3, 18, 15, 0.72); }
+      .stage b { color: var(--cyan); display: block; margin: 18px 0 10px; }
+      .hmw { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 28px; }
+      .big-panel { border: 1px solid rgba(104, 221, 255, 0.2); border-radius: 42px; padding: 48px; background: rgba(5, 28, 27, 0.72); }
+      .screens { display: grid; gap: 40px; }
+      .screen-card { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; padding: 28px; border: 1px solid var(--line); border-radius: 38px; background: rgba(3, 17, 14, 0.72); }
+      .screen-card:nth-child(even) { grid-template-columns: 0.9fr 1.1fr; }
+      .screen-card:nth-child(even) img { order: 2; }
+      .screen-card img { width: 100%; border-radius: 26px; border: 1px solid rgba(255,255,255,0.08); display: block; }
+      .screen-card ul { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 22px 0 0; list-style: none; }
+      .screen-card li { color: #ddffe3; border: 1px solid rgba(156,255,89,0.22); border-radius: 999px; padding: 8px 12px; }
+      .footer { padding: 120px 0 80px; }
+      .footer-card { border: 1px solid rgba(25,239,154,0.24); border-radius: 44px; padding: 56px; display: flex; justify-content: space-between; align-items: center; background: rgba(8, 32, 25, 0.72); }
+      @media (max-width: 980px) {
+        .frame { width: min(100vw - 28px, 760px); }
+        .topbar { position: static; transform: none; margin-top: 14px; height: auto; border-radius: 28px; flex-wrap: wrap; gap: 18px; padding: 18px; }
+        nav { display: none; }
+        .hero { padding-top: 54px; }
+        .hero-grid, .section-head, .hmw, .screen-card, .screen-card:nth-child(even) { grid-template-columns: 1fr; }
+        .screen-card:nth-child(even) img { order: 0; }
+        .cards { grid-template-columns: 1fr; }
+        h1 { font-size: 58px; }
+        h2 { font-size: 42px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar frame">
+      <a class="brand" href="#top">
+        <span class="mark"><svg viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M12 20V10"/><path d="M12 10c-3.8 0-6-1.8-6-4.2C6 3.9 7.2 3 8.7 3c2.4 0 3.3 2.6 3.3 7Z"/><path d="M12 10c4 0 6-2 6-4.5C18 3.8 16.9 3 15.4 3 13 3 12 5.7 12 10Z"/></svg></span>
+        <span><strong>学点儿</strong><span>PERSONAL KNOWLEDGE</span></span>
+      </a>
+      <nav><a href="#overview">基本面</a><a href="#users">用户</a><a href="#journey">旅程</a><a href="#screens">页面</a></nav>
+      <a class="contact" href="mailto:hello@xuedian.app">联系合作 ↗</a>
+    </header>
+    <main id="top">
+      <section class="hero">
+        <div class="frame hero-grid">
+          <div class="hero-copy">
+            <p class="kicker">PRODUCT CASE / PRODUCT STRATEGY</p>
+            <h1>把看过的内容，<br />长成自己的知识</h1>
+            <p>学点儿是一款面向高频信息摄入者的个人知识消化工具。它把收集、思考、整理、回看放进一个轻量闭环里，让每天留下的一点点，最后真的变成自己的东西。</p>
+            <div class="actions"><a class="button primary" href="#overview">阅读产品逻辑 ↓</a><a class="button" href="#screens">查看页面</a></div>
+          </div>
+          <aside class="case-card">
+            <span class="kicker">CASE NOTE / LIVE</span>
+            <span class="mark"><svg viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M12 20V10"/><path d="M12 10c-3.8 0-6-1.8-6-4.2C6 3.9 7.2 3 8.7 3c2.4 0 3.3 2.6 3.3 7Z"/><path d="M12 10c4 0 6-2 6-4.5C18 3.8 16.9 3 15.4 3 13 3 12 5.7 12 10Z"/></svg></span>
+            <p class="quote">不是收藏更多，<br />而是留下下一个判断。</p>
+            <p>ROLE：产品 / 设计 / 开发<br />FOCUS：从“看过”到“留得住”</p>
+          </aside>
+        </div>
+      </section>
+      <section id="overview">
+        <div class="frame">
+          <div class="section-head"><div><p class="kicker">01 / PRODUCT FUNDAMENTALS</p><h2>先把产品为什么存在，讲清楚。</h2></div><p>学点儿不是一个“多存一点”的工具，而是帮助用户完成从看过、想过到留得住的个人知识闭环。</p></div>
+          <div class="cards">
+            <article class="card"><span class="num">01</span><h3>产品命题</h3><p>让碎片信息变成可复用的知识资产。</p></article>
+            <article class="card"><span class="num">02</span><h3>核心问题</h3><p>信息不缺，真正缺的是消化、回看和复用。</p></article>
+            <article class="card"><span class="num">03</span><h3>价值主张</h3><p>文档保存来源，思考点保存判断，仙人掌显示成长。</p></article>
+          </div>
+        </div>
+      </section>
+      <section id="users">
+        <div class="frame">
+          <div class="section-head"><div><p class="kicker">02 / USER SEGMENTS</p><h2>不按年龄分，按任务分。</h2></div><p>优先服务每天都有高频输入，又需要输出判断的人，再扩展到学习、创作和长期知识管理。</p></div>
+          <div class="cards">
+            <article class="card"><span class="num">PRIMARY</span><h3>高频信息摄入者</h3><p>互联网从业者每天阅读竞品、行业文章、报告和研究资料，需要转化为工作素材。</p><div class="pill-row"><span class="pill">来源分散</span><span class="pill">想法易忘</span><span class="pill">回找困难</span></div></article>
+            <article class="card"><span class="num">SECONDARY</span><h3>自学型学习者</h3><p>把教程、课程和文章组织成可复习的学习记录，确认自己确实学会了什么。</p><div class="pill-row"><span class="pill">结构不足</span><span class="pill">进度不可见</span></div></article>
+            <article class="card"><span class="num">EXTEND</span><h3>素材驱动创作者</h3><p>把观点、案例和金句沉淀成可追溯、可复用的创作素材。</p><div class="pill-row"><span class="pill">灵感脱节</span><span class="pill">素材难复用</span></div></article>
+          </div>
+        </div>
+      </section>
+      <section id="journey">
+        <div class="frame">
+          <div class="section-head"><div><p class="kicker">03 / USER JOURNEY</p><h2>从一次收藏，走到一次复用。</h2></div><p>关键不是让用户保存更多，而是让保存后的下一步足够自然。</p></div>
+          <div class="journey">
+            <article class="stage"><span class="num">01</span><h3>发现问题</h3><b>浏览器 / 微信</b><p>看到有价值内容，但散落各处。</p></article>
+            <article class="stage"><span class="num">02</span><h3>首次收集</h3><b>新建文档</b><p>粘贴标题、链接和正文。</p></article>
+            <article class="stage"><span class="num">03</span><h3>首次消化</h3><b>我的思考</b><p>写下一个判断或问题。</p></article>
+            <article class="stage"><span class="num">04</span><h3>日常整理</h3><b>知识库 / 标签</b><p>归类、置顶、保持结构。</p></article>
+            <article class="stage"><span class="num">05</span><h3>回看复用</h3><b>按日期 / 搜索</b><p>旧内容再次被使用。</p></article>
+            <article class="stage"><span class="num">06</span><h3>持续使用</h3><b>仙人掌反馈</b><p>看见每天长出了什么。</p></article>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="frame hmw">
+          <div><p class="kicker">04 / PAIN POINTS + HMW</p><h2>从表层不爽，追到可以设计的问题。</h2></div>
+          <div class="big-panel"><h3>How might we</h3><p>如何让用户在保存文档后，自然写下一条自己的判断？如何让旧内容更容易被发现，同时不增加维护成本？如何让每日积累一眼可见，但不把成长变成数量压力？</p></div>
+        </div>
+      </section>
+      <section id="screens">
+        <div class="frame">
+          <div class="section-head"><div><p class="kicker">PRODUCT EVIDENCE / 06 SCREENS</p><h2>六个页面，把策略落到体验。</h2></div><p>真实产品页面是这套策略的证据：仙人掌负责反馈，文档负责来源，思考点负责消化，时间线负责复用。</p></div>
+          <div class="screens">
+            <article class="screen-card"><img src="portfolio-screenshots/01-home-growth-field.jpg" alt="知识生长首页" /><div><span class="num">01 / Growth field</span><h3>知识生长首页</h3><p>用仙人掌承载每天的积累，让文档、思考点和连续记录从数据变成可见的成长反馈。</p><ul><li>首页体验</li><li>生长可视化</li><li>情绪设计</li></ul></div></article>
+            <article class="screen-card"><img src="portfolio-screenshots/02-docs-dashboard.jpg" alt="云文档工作流" /><div><span class="num">02 / Knowledge field</span><h3>云文档工作流</h3><p>围绕收集、整理、回看三个动作组织入口，让知识库、文档与思考点之间的关系一眼可读。</p><ul><li>信息架构</li><li>侧栏导航</li><li>工作流</li></ul></div></article>
+            <article class="screen-card"><img src="portfolio-screenshots/03-document-detail.jpg" alt="从文档到判断" /><div><span class="num">03 / Document detail</span><h3>从文档到判断</h3><p>正文、AI 摘要与我的思考被放在同一条阅读路径里，让输入自然进入自己的判断。</p><ul><li>内容层级</li><li>AI 摘要</li><li>思考关联</li></ul></div></article>
+            <article class="screen-card"><img src="portfolio-screenshots/04-thought-garden.jpg" alt="思考点花园" /><div><span class="num">04 / Thought garden</span><h3>思考点花园</h3><p>把灵感、问题和判断单独拎出来，成为可以持续回看的轻量知识单元。</p><ul><li>思考管理</li><li>关联文档</li><li>轻量记录</li></ul></div></article>
+            <article class="screen-card"><img src="portfolio-screenshots/05-growth-timeline.jpg" alt="成长时间线" /><div><span class="num">05 / Growth timeline</span><h3>成长时间线</h3><p>按天回看文档与思考点，让内容从静态归档变成连续轨迹。</p><ul><li>时间叙事</li><li>每日回看</li><li>历史轨迹</li></ul></div></article>
+            <article class="screen-card"><img src="portfolio-screenshots/06-export-capsule.jpg" alt="导出胶囊" /><div><span class="num">06 / Export capsule</span><h3>导出胶囊</h3><p>把原文、AI 摘要与自己的思考一起带走，保留个人知识系统的可迁移性。</p><ul><li>Markdown</li><li>内容筛选</li><li>知识迁移</li></ul></div></article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="frame footer-card"><h2>学点儿还在生长。</h2><a class="button primary" href="mailto:hello@xuedian.app">发起下一轮优化 ↗</a></div>
+    </footer>
+  </body>
+</html>
